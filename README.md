@@ -10,7 +10,7 @@ A high-end, minimalist SDDM theme inspired by the **Nothing Phone** aesthetic. F
 ## 🌟 Features
 
 - **True Nothing Typography:** Powered by the `Ndot` font family with an adaptive monospaced grid for a perfectly balanced clock.
-- **Adaptive Monochrome:** The clock and UI hints automatically switch between **Pure Black** and **Pure White** based on your wallpaper's brightness.
+- **Adaptive Monochrome:** The clock automatically switches between **Pure Black** and **Pure White** based on your wallpaper's brightness.
 - **Obsidian Glass UI:** A sleek, 55% translucent dark card with a precision white border and "Material You" red accents.
 - **Cinematic Reveal:** The clock materializes with a smooth, delayed fade-in after the wallpaper is processed.
 - **Crimson Minimalism Switchers:** Fully keyboard-navigable user and session lists with a gliding **Nothing Red** dot indicator.
@@ -59,8 +59,8 @@ sudo zypper install libqt5-qtgraphicaleffects libqt5-qtquickcontrols2 libqt5-qts
 
 ## 🚀 Installation
 
-### 1. Automatic Script
-Recommended for most users. This script handles file copying and provides configuration instructions:
+### 1. Automatic Script (Recommended)
+This script handles file copying and asks if you want to apply the theme immediately:
 ```bash
 git clone https://github.com/xCaptaiN09/glyph-sddm.git
 cd glyph-sddm
@@ -84,7 +84,7 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
         owner = "xCaptaiN09";
         repo = "glyph-sddm";
         rev = "main";
-        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash after first build attempt
+        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Nix will prompt for the correct hash
       };
       installPhase = ''
         mkdir -p $out/share/sddm/themes/glyph-sddm
@@ -98,30 +98,38 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
 }
 ```
 
+After editing, apply the configuration by running:
+```bash
+sudo nixos-rebuild switch
+```
+
+> [!TIP]
+> **First-time build:** Nix will likely report a "hash mismatch" error because of the dummy `sha256` value. Simply copy the **actual hash** from the error message, update it in your config, and run the rebuild command again.
+
 ---
 
 ## 🛠 Configuration & Testing
 
 ### Apply Theme Manually
-If you didn't use the script, set the theme in `/etc/sddm.conf`:
+If you didn't use the script, set the theme in `/etc/sddm.conf` (or your local override):
 ```ini
 [Theme]
 Current=glyph-sddm
 ```
 
-### Test Mode
-Run this command to preview the theme without logging out:
+### Preview Without Logging Out
+Run this command to preview the theme:
 ```bash
-sddm-greeter --test-mode --theme ~/Projects/glyph-sddm
+sddm-greeter --test-mode --theme /usr/share/sddm/themes/glyph-sddm
 ```
 
 ---
 
 ## 🎨 Customization
 
-Edit the `assets/` directory to personalize:
-- **Wallpaper:** Replace `assets/images/background.jpg` with your own image.
-- **Avatar:** Place your profile picture in `assets/images/avatar.jpg`.
+Edit the files inside `/usr/share/sddm/themes/glyph-sddm/assets/images/`:
+- **Wallpaper:** Replace `background.jpg` with your own image.
+- **Avatar:** Place your profile picture in `avatar.jpg`.
 
 ## 🤝 Credits
 
