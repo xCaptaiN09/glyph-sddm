@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=Glyph
+Description=A high-end Nothing Phone inspired SDDM theme with adaptive typography and obsidian glass aesthetics.
+Author=xCaptaiN09
+Copyright=(c) 2026 xCaptaiN09
+License=MIT
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+Screenshot=screenshot.png
