@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
-import QtGraphicalEffects 1.15
 
 Item {
     id: root
@@ -100,10 +99,41 @@ Item {
                 RowLayout {
                     anchors.centerIn: parent; spacing: 15
                     Rectangle {
-                        width: 54; height: 54; radius: 27; color: Qt.rgba(255, 255, 255, 0.08); border.color: Qt.rgba(255, 255, 255, 0.25); border.width: 1.5; clip: true
-                        Text { anchors.centerIn: parent; anchors.verticalCenterOffset: 3; text: root.activeUserName.charAt(0).toUpperCase(); color: root.textColor; font.pixelSize: 26; font.family: root.fontName }
-                        Image { id: avatarImage; anchors.fill: parent; source: "../assets/images/avatar.jpg"; fillMode: Image.PreserveAspectCrop; visible: false }
-                        OpacityMask { anchors.fill: parent; source: avatarImage; visible: avatarImage.status === Image.Ready; maskSource: Rectangle { width: 54; height: 54; radius: 27 } }
+                        width: 54; height: 54; radius: 27
+                        color: Qt.rgba(255, 255, 255, 0.08)
+                        border.color: Qt.rgba(255, 255, 255, 0.25); border.width: 1.5
+                        
+                        Text { 
+                            anchors.centerIn: parent; anchors.verticalCenterOffset: 3
+                            text: root.activeUserName.charAt(0).toUpperCase()
+                            color: root.textColor; font.pixelSize: 26; font.family: root.fontName 
+                        }
+
+                        // Universal Circle Avatar (Works on Qt5 & Qt6 without plugins)
+                        Canvas {
+                            id: avatarCanvas
+                            anchors.fill: parent
+                            visible: avatarImage.status === Image.Ready
+                            
+                            onPaint: {
+                                var ctx = getContext("2d");
+                                ctx.reset();
+                                // Create circular path
+                                ctx.beginPath();
+                                ctx.arc(width/2, height/2, width/2, 0, 2 * Math.PI);
+                                ctx.closePath();
+                                ctx.clip(); // Clip to circle
+                                // Draw the image
+                                ctx.drawImage(avatarImage, 0, 0, width, height);
+                            }
+
+                            Image {
+                                id: avatarImage
+                                source: "../assets/images/avatar.jpg"
+                                visible: false
+                                onStatusChanged: if (status === Image.Ready) avatarCanvas.requestPaint()
+                            }
+                        }
                     }
                     Text { text: root.activeUserName.toUpperCase(); color: root.textColor; font.pixelSize: 20; font.family: root.fontName }
                     Text { text: "▾"; color: root.textColor; font.pixelSize: 14; opacity: 0.5 }

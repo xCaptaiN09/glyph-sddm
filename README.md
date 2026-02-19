@@ -21,37 +21,23 @@ A high-end, minimalist SDDM theme inspired by the **Nothing Phone** aesthetic. F
 
 ## 📦 Prerequisites
 
-Before installing, you **must** install the required Qt5 modules for your distribution to avoid a black screen:
+Glyph SDDM is now **Universally Compatible** with both **Qt5** and **Qt6** (including Fedora 40+ and Arch Plasma 6). You only need the basic Qt Quick modules which are usually pre-installed with SDDM:
 
 <details>
-<summary><b>Arch Linux / CachyOS / Manjaro</b> (Click to expand)</summary>
+<summary><b>Arch Linux / Fedora / openSUSE</b> (Click to expand)</summary>
 
 ```bash
-sudo pacman -S --needed qt5-graphicaleffects qt5-quickcontrols2 qt5-svg
+# Most systems already have these, but if the screen is black:
+# Fedora: sudo dnf install qt5-qtquickcontrols2 qt5-qtsvg
+# Arch: sudo pacman -S qt5-quickcontrols2 qt5-svg
 ```
 </details>
 
 <details>
-<summary><b>Ubuntu / Debian / Mint / Kali</b> (Click to expand)</summary>
+<summary><b>Ubuntu / Debian / Mint</b> (Click to expand)</summary>
 
 ```bash
-sudo apt update && sudo apt install qml-module-qtgraphicaleffects qml-module-qtquick-controls2 qml-module-qtquick-layouts libqt5svg5
-```
-</details>
-
-<details>
-<summary><b>Fedora / RHEL / CentOS</b> (Click to expand)</summary>
-
-```bash
-sudo dnf install qt5-qtgraphicaleffects qt5-qtquickcontrols2 qt5-qtsvg
-```
-</details>
-
-<details>
-<summary><b>openSUSE</b> (Click to expand)</summary>
-
-```bash
-sudo zypper install libqt5-qtgraphicaleffects libqt5-qtquickcontrols2 libqt5-qtsvg
+sudo apt update && sudo apt install qml-module-qtquick-controls2 qml-module-qtquick-layouts libqt5svg5
 ```
 </details>
 
@@ -91,7 +77,6 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
         cp -r * $out/share/sddm/themes/glyph/
       '';
     })
-    pkgs.libsForQt5.qtgraphicaleffects
     pkgs.libsForQt5.qtquickcontrols2
     pkgs.libsForQt5.qtsvg
   ];
