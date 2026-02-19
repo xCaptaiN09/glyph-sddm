@@ -60,7 +60,7 @@ sudo zypper install libqt5-qtgraphicaleffects libqt5-qtquickcontrols2 libqt5-qts
 ## 🚀 Installation
 
 ### 1. Automatic Script
-Recommended for most users. This script handles file copying and updates your configuration:
+Recommended for most users. This script handles file copying and provides configuration instructions:
 ```bash
 git clone https://github.com/xCaptaiN09/glyph-sddm.git
 cd glyph-sddm
@@ -84,7 +84,7 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
         owner = "xCaptaiN09";
         repo = "glyph-sddm";
         rev = "main";
-        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash
+        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash after first build attempt
       };
       installPhase = ''
         mkdir -p $out/share/sddm/themes/glyph-sddm
@@ -112,7 +112,7 @@ Current=glyph-sddm
 ### Test Mode
 Run this command to preview the theme without logging out:
 ```bash
-sddm-greeter --test-mode --theme /usr/share/sddm/themes/glyph-sddm
+sddm-greeter --test-mode --theme ~/Projects/glyph-sddm
 ```
 
 ---
