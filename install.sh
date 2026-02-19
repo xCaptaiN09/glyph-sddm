@@ -5,7 +5,7 @@
 
 set -e
 
-THEME_NAME="glyph-sddm"
+THEME_NAME="glyph"
 THEME_DIR="/usr/share/sddm/themes/${THEME_NAME}"
 
 # Colors

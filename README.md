@@ -74,12 +74,12 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
 { pkgs, ... }: {
   services.displayManager.sddm = {
     enable = true;
-    theme = "glyph-sddm";
+    theme = "glyph";
   };
 
   environment.systemPackages = [
     (pkgs.stdenv.mkDerivation {
-      name = "glyph-sddm";
+      name = "glyph";
       src = pkgs.fetchFromGitHub {
         owner = "xCaptaiN09";
         repo = "glyph-sddm";
@@ -87,8 +87,8 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
         sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash after first build attempt
       };
       installPhase = ''
-        mkdir -p $out/share/sddm/themes/glyph-sddm
-        cp -r * $out/share/sddm/themes/glyph-sddm/
+        mkdir -p $out/share/sddm/themes/glyph
+        cp -r * $out/share/sddm/themes/glyph/
       '';
     })
     pkgs.libsForQt5.qtgraphicaleffects
@@ -113,12 +113,12 @@ sudo nixos-rebuild switch
    ```
 2. Copy the folder to SDDM themes directory:
    ```bash
-   sudo cp -r glyph-sddm /usr/share/sddm/themes/glyph-sddm
+   sudo cp -r glyph-sddm /usr/share/sddm/themes/glyph
    ```
 3. Set the theme in `/etc/sddm.conf`:
    ```ini
    [Theme]
-   Current=glyph-sddm
+   Current=glyph
    ```
 
 ---
@@ -128,14 +128,14 @@ sudo nixos-rebuild switch
 ### Preview Without Logging Out
 Run this command to preview the theme:
 ```bash
-sddm-greeter --test-mode --theme /usr/share/sddm/themes/glyph-sddm
+sddm-greeter --test-mode --theme /usr/share/sddm/themes/glyph
 ```
 
 ---
 
 ## 🎨 Customization
 
-Edit the files inside `/usr/share/sddm/themes/glyph-sddm/assets/images/`:
+Edit the files inside `/usr/share/sddm/themes/glyph/assets/images/`:
 - **Wallpaper:** Replace `background.jpg` with your own image.
 - **Avatar:** Place your profile picture in `avatar.jpg`.
 
