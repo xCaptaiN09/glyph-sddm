@@ -60,7 +60,7 @@ sudo zypper install libqt5-qtgraphicaleffects libqt5-qtquickcontrols2 libqt5-qts
 ## 🚀 Installation
 
 ### 1. Automatic Script (Recommended)
-This script handles file copying and asks if you want to apply the theme immediately:
+This script handles file copying and provides configuration instructions:
 ```bash
 git clone https://github.com/xCaptaiN09/glyph-sddm.git
 cd glyph-sddm
@@ -84,7 +84,7 @@ NixOS users should add the following snippet to their `/etc/nixos/configuration.
         owner = "xCaptaiN09";
         repo = "glyph-sddm";
         rev = "main";
-        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Nix will prompt for the correct hash
+        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash after first build attempt
       };
       installPhase = ''
         mkdir -p $out/share/sddm/themes/glyph-sddm
@@ -106,16 +106,24 @@ sudo nixos-rebuild switch
 > [!TIP]
 > **First-time build:** Nix will likely report a "hash mismatch" error because of the dummy `sha256` value. Simply copy the **actual hash** from the error message, update it in your config, and run the rebuild command again.
 
+### 3. Manual
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/xCaptaiN09/glyph-sddm.git
+   ```
+2. Copy the folder to SDDM themes directory:
+   ```bash
+   sudo cp -r glyph-sddm /usr/share/sddm/themes/glyph-sddm
+   ```
+3. Set the theme in `/etc/sddm.conf`:
+   ```ini
+   [Theme]
+   Current=glyph-sddm
+   ```
+
 ---
 
 ## 🛠 Configuration & Testing
-
-### Apply Theme Manually
-If you didn't use the script, set the theme in `/etc/sddm.conf` (or your local override):
-```ini
-[Theme]
-Current=glyph-sddm
-```
 
 ### Preview Without Logging Out
 Run this command to preview the theme:
