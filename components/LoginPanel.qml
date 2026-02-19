@@ -165,6 +165,12 @@ Item {
             }
         }
 
+        Text {
+            anchors.bottom: parent.bottom; anchors.bottomMargin: 15; anchors.horizontalCenter: parent.horizontalCenter
+            text: "NUM LOCK IS ON"; font.family: root.fontName; font.pixelSize: 10; font.letterSpacing: 1
+            color: root.accentColor; opacity: 0.8; visible: keyboard.numLock
+        }
+
         Rectangle {
             id: sessionDropdown; property bool open: false; visible: open; z: 100; width: parent.width - 20; height: Math.min(200, (sessionModel ? sessionModel.count : 0) * 50 + 20)
             anchors.bottom: parent.bottom; anchors.bottomMargin: 10; anchors.horizontalCenter: parent.horizontalCenter
