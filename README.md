@@ -7,6 +7,20 @@ A high-end, minimalist SDDM theme inspired by the **Nothing Phone** aesthetic. F
   <img src="screenshots/login_screen.png" width="45%" alt="Login Screen" />
 </div>
 
+<div align="center">
+  <img src="screenshots/lock_screen_2.png" width="22%" />
+  <img src="screenshots/login_screen_2.png" width="22%" />
+  <img src="screenshots/lock_screen_3.png" width="22%" />
+  <img src="screenshots/login_screen_3.png" width="22%" />
+</div>
+
+<div align="center">
+  <img src="screenshots/lock_screen_4.png" width="22%" />
+  <img src="screenshots/login_screen_4.png" width="22%" />
+  <img src="screenshots/lock_screen_5.png" width="22%" />
+  <img src="screenshots/login_screen_5.png" width="22%" />
+</div>
+
 ## 🌟 Features
 
 - **True Nothing Typography:** Powered by the `Ndot` font family with an adaptive monospaced grid for a perfectly balanced clock.
