@@ -53,7 +53,13 @@ cd glyph-sddm
 sudo ./install.sh
 ```
 
-### 2. NixOS (Declarative)
+### 2. Arch Linux (AUR)
+Glyph SDDM is available on the AUR as `glyph-sddm-git`. You can install it using your favorite AUR helper:
+```bash
+yay -S glyph-sddm-git
+```
+
+### 3. NixOS (Declarative)
 NixOS users should add the following snippet to their `/etc/nixos/configuration.nix`:
 
 ```nix
