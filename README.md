@@ -97,7 +97,7 @@ sudo nixos-rebuild switch
 > [!TIP]
 > **First-time build:** Nix will likely report a "hash mismatch" error because of the dummy `sha256` value. Simply copy the **actual hash** from the error message, update it in your config, and run the rebuild command again.
 
-### 3. Manual
+### 4. Manual
 1. Clone the repository:
    ```bash
    git clone https://github.com/xCaptaiN09/glyph-sddm.git
