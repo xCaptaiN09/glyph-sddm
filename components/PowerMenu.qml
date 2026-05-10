@@ -10,6 +10,7 @@ Item {
     property color accentColor: "#D71921" // Nothing Red
     property color textColor: "white"
     property string fontName: "monospace"
+    property string symbolFontName: "monospace"
 
     RowLayout {
         id: powerRow
@@ -22,23 +23,24 @@ Item {
             id: sleepBtn
             Layout.preferredWidth: 48
             Layout.preferredHeight: 48
-            
+
             background: Rectangle {
                 color: Qt.rgba(0, 0, 0, 0.7)
                 radius: 24
                 border.color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.2)
                 border.width: 1
             }
-            
+
             contentItem: Item {
                 Text {
                     anchors.centerIn: parent
                     text: "󰤄"
+                    font.family: root.symbolFontName
                     font.pixelSize: 20
                     color: root.textColor
                 }
             }
-            
+
             onClicked: sddm.suspend()
         }
 
@@ -47,23 +49,24 @@ Item {
             id: restartBtn
             Layout.preferredWidth: 48
             Layout.preferredHeight: 48
-            
+
             background: Rectangle {
                 color: Qt.rgba(0, 0, 0, 0.7)
                 radius: 24
                 border.color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.2)
                 border.width: 1
             }
-            
+
             contentItem: Item {
                 Text {
                     anchors.centerIn: parent
                     text: "󰑐"
+                    font.family: root.symbolFontName
                     font.pixelSize: 20
                     color: root.textColor
                 }
             }
-            
+
             onClicked: sddm.reboot()
         }
 
@@ -72,23 +75,24 @@ Item {
             id: powerBtn
             Layout.preferredWidth: 60
             Layout.preferredHeight: 60
-            
+
             background: Rectangle {
                 color: root.accentColor
                 radius: 30
             }
-            
+
             contentItem: Item {
                 Text {
                     anchors.centerIn: parent
                     text: "󰐥"
+                    font.family: root.symbolFontName
                     font.pixelSize: 24
                     color: "white"
                     // Manual nudge if the font baseline is off
                     anchors.verticalCenterOffset: 0
                 }
             }
-            
+
             onClicked: sddm.powerOff()
         }
     }

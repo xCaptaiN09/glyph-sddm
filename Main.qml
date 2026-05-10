@@ -25,6 +25,7 @@ Rectangle {
     }
 
     FontLoader { id: ndotFont; source: "assets/fonts/Ndot-57-Aligned.ttf"; }
+    FontLoader { id: symbolFont; source: "assets/fonts/SymbolsNerdFont.ttf" }
     property string globalFont: ndotFont.status == FontLoader.Ready ? ndotFont.name : "monospace"
 
     Image {
@@ -76,7 +77,7 @@ Rectangle {
     Clock {
         id: clock
         anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 80
-        fontName: container.globalFont
+        symbolFontName: symbolFont.name; fontName: container.globalFont
         textColor: container.finalClockColor
         
         visible: container.readyToReveal
@@ -109,7 +110,7 @@ Rectangle {
     PowerMenu {
         id: powerMenu
         anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 50
-        fontName: container.globalFont; textColor: "white"
+        symbolFontName: symbolFont.name; fontName: container.globalFont; textColor: "white"
         opacity: container.isUnlocked ? 0.5 : 1.0; Behavior on opacity { NumberAnimation { duration: 400 } }
     }
 

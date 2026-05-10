@@ -8,7 +8,8 @@ Item {
     height: 300
 
     property string fontName: "serif"
-    property color textColor: "transparent" // Start transparent to prevent flash
+    property color textColor: "transparent"
+    property string symbolFontName: "serif"
 
     function getOSLogo(name) {
         var n = name.toLowerCase()
@@ -29,11 +30,11 @@ Item {
         if (n.includes("cent")) return "󰣑"
         if (n.includes("garuda")) return "󱄊"
         if (n.includes("endeavour")) return "󰣚"
-        return "" 
+        return ""
     }
 
     property string currentHostName: (sddm.hostName && sddm.hostName !== "") ? sddm.hostName : "archlinux"
-    property string timeStr: Qt.formatTime(new Date(), "HH:mm")
+    property string timeStr: "00:00"
 
     Column {
         anchors.left: parent.left
@@ -80,11 +81,36 @@ Item {
             }
             Row {
                 spacing: 12; topPadding: 10
-                Text { text: root.getOSLogo(root.currentHostName); color: root.textColor; font.pixelSize: 22; visible: text !== ""; anchors.verticalCenter: parent.verticalCenter; anchors.verticalCenterOffset: -3 }
+                Text { text: root.getOSLogo(root.currentHostName); font.family: root.symbolFontName; color: root.textColor; font.pixelSize: 22; visible: text !== ""; anchors.verticalCenter: parent.verticalCenter; anchors.verticalCenterOffset: -3 }
                 Text { text: root.currentHostName.toUpperCase(); font.family: root.fontName; font.pixelSize: 22; color: root.textColor; opacity: 0.8; anchors.verticalCenter: parent.verticalCenter }
             }
         }
     }
 
-    Timer { id: timeTimer; interval: 1000; running: true; repeat: true; onTriggered: root.timeStr = Qt.formatTime(new Date(), "HH:mm") }
+    Timer {
+        id: timeTimer
+        interval: 1000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+
+            if (config.use24HourClock === "true") {
+                // 24-hour format
+                var hStr = hours < 10 ? "0" + hours : "" + hours;
+                var mStr = minutes < 10 ? "0" + minutes : "" + minutes;
+                root.timeStr = hStr + ":" + mStr;
+            } else {
+                // 12-hour format
+                hours = hours % 12;
+                if (hours === 0) hours = 12;
+                var hStr12 = hours < 10 ? "0" + hours : "" + hours;
+                var mStr12 = minutes < 10 ? "0" + minutes : "" + minutes;
+                root.timeStr = hStr12 + ":" + mStr12;
+            }
+        }
+    }
 }
