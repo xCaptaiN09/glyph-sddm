@@ -12,9 +12,9 @@ Rectangle {
 
     // State Management
     property bool isUnlocked: false
-    property color finalClockColor: "transparent" 
-    property bool readyToReveal: false 
-    
+    property color finalClockColor: "transparent"
+    property bool readyToReveal: false
+
     // MASTER INDICES
     property int userIdx: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
     property int sessionIdx: sessionModel.lastIndex >= 0 ? sessionModel.lastIndex : 0
@@ -41,7 +41,7 @@ Rectangle {
     Canvas {
         id: brightnessCanvas
         width: 20; height: 20; visible: false
-        renderTarget: Canvas.Image 
+        renderTarget: Canvas.Image
         onPaint: {
             var ctx = getContext("2d")
             ctx.drawImage(bg, 0, 0, width, height)
@@ -49,11 +49,11 @@ Rectangle {
             var r = 0, g = 0, b = 0
             for (var i = 0; i < data.length; i += 4) { r += data[i]; g += data[i+1]; b += data[i+2] }
             var luminance = (0.299 * (r/(data.length/4)) + 0.587 * (g/(data.length/4)) + 0.114 * (b/(data.length/4))) / 255
-            
+
             // 1. STEP ONE: CALCULATE AND ASSIGN COLOR
             container.finalClockColor = (luminance > 0.5) ? "black" : "white"
             console.log("Calculated Color: " + container.finalClockColor)
-            
+
             // 2. STEP TWO: WAIT FOR PROPERTY TO SETTLE BEFORE REVEAL
             revealTimer.start()
         }
@@ -71,7 +71,12 @@ Rectangle {
     }
 
     MouseArea { anchors.fill: parent; onClicked: container.isUnlocked = true; enabled: !container.isUnlocked }
-    Keys.onPressed: if (!container.isUnlocked) { container.isUnlocked = true; event.accepted = true; }
+    Keys.onPressed: (event) => {
+        if (!container.isUnlocked) {
+            container.isUnlocked = true;
+            event.accepted = true;
+        }
+    }
 
     // THE CLOCK
     Clock {
@@ -79,15 +84,15 @@ Rectangle {
         anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 80
         symbolFontName: symbolFont.name; fontName: container.globalFont
         textColor: container.finalClockColor
-        
+
         visible: container.readyToReveal
         opacity: visible ? (container.isUnlocked ? 0.4 : 1.0) : 0.0
-        
-        Behavior on opacity { 
-            NumberAnimation { 
-                duration: 1200; 
-                easing.type: Easing.OutQuint 
-            } 
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 1200;
+                easing.type: Easing.OutQuint
+            }
         }
         Behavior on scale { NumberAnimation { duration: 450; easing.type: Easing.OutCubic } }
     }
@@ -103,7 +108,7 @@ Rectangle {
         Behavior on scale { NumberAnimation { duration: 450; easing.type: Easing.OutCubic } }
         onVisibleChanged: if (visible) focusTimer.start(); else loginPanel.reset()
     }
-    
+
     Connections { target: sddm; function onLoginFailed() { loginPanel.triggerError() } }
     Timer { id: focusTimer; interval: 100; onTriggered: loginPanel.focusPassword() }
 
