@@ -168,4 +168,3 @@ Edit `theme.conf` or replace assets in `assets/images/`:
 
 ---
 *Made with ❤️ for the Linux community.*
-```
