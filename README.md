@@ -169,13 +169,3 @@ Edit `theme.conf` or replace assets in `assets/images/`:
 ---
 *Made with ❤️ for the Linux community.*
 ```
-
-Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
-
-Now, let's commit all the massive upgrades we made today:
-
-```fish
-git add -A
-git commit -m "Pixie-level upgrade: Add Nerd Font bundling, 12/24h clock, smart install script, and bulletproof NixOS docs"
-git push
-```
